@@ -164,18 +164,21 @@
     .modal-content {
       background-color: #000000;
       color: #ffffff;
-      margin: 15% auto; /*  Увеличим отступ на маленьких экранах */
+      margin: 15% auto; /* Увеличим отступ на маленьких экранах */
       padding: 20px;
       border: 1px solid #888;
-      width: 80%; /*  Увеличим ширину на маленьких экранах */
+      width: 80%; /* Увеличим ширину на маленьких экранах */
       max-width: 600px; /* Ограничим ширину на больших экранах */
       border-radius: 10px;
-      box-sizing: border-box; /*  Чтобы padding не увеличивал ширину */
+      box-sizing: border-box; /* Чтобы padding не увеличивал ширину */
+      position: relative; /* Для позиционирования кнопки закрытия */
     }
 
     .close-button {
       color: #aaa;
-      float: right;
+      position: absolute; /* Абсолютное позиционирование */
+      top: 10px;       /*  Отступ от верхнего края */
+      right: 10px;      /* Отступ от правого края */
       font-size: 28px;
       font-weight: bold;
       cursor: pointer;
@@ -197,6 +200,9 @@
       cursor: pointer;
       font-size: 16px;
       transition: background-color 0.3s ease; /* Плавное изменение цвета */
+      display: block; /* Чтобы занимала всю ширину */
+      margin: 20px auto 0; /* Отступ сверху и авто-центрирование */
+      width: fit-content; /* Автоматическая ширина по контенту */
     }
 
     .back-to-menu-button:hover {
@@ -206,17 +212,24 @@
     /* ASCII Art */
     .ascii-art {
       font-family: monospace;
-      white-space: pre;
-      font-size: 14px;
+      white-space: pre-wrap; /* Важно: перенос строк */
+      font-size: 12px;    /*  Уменьшаем размер шрифта */
       line-height: 1.0;
+      overflow: auto;   /* Добавим полосы прокрутки если не помещается */
+      max-height: 400px; /*  Ограничим максимальную высоту */
     }
 
-    /* Медиа-запросы для адаптивности */
+    /* Медиа-запросы для адаптивности (модальное окно) */
     @media (max-width: 768px) {
-      .container {
-        flex-direction: column; /*  Элементы располагаются вертикально */
-        align-items: center; /*  Центрируем элементы по горизонтали */
+      .modal-content {
+        margin: 20% auto;
+        width: 90%; /* Еще больше ширины на маленьких экранах */
       }
+
+      .ascii-art {
+        font-size: 10px; /*  Еще уменьшим шрифт на маленьких экранах */
+      }
+    }
 
       .image-container {
         width: 100%; /*  Изображение занимает всю ширину */
