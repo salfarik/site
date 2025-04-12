@@ -5,15 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Web site</title>
   <style>
-    /* Общие стили (из предыдущих примеров) */
+    /* Общие стили */
+    body {
+      background-color: black;
+      color: white;
+      font-family: sans-serif; /* Добавил шрифт для лучшей читаемости на мобильных */
+      margin: 0; /* Убрал стандартные отступы body */
+    }
+
     .magic-button {
       background-color: #3498db;
       color: white;
-      padding: 10px 20px;
+      padding: 12px 24px; /* Увеличил padding для удобства нажатия на мобильных */
       border: none;
-      border-radius: 20px;
+      border-radius: 24px; /* Увеличил радиус для более округлой формы */
       cursor: pointer;
-      font-size: 16px;
+      font-size: 18px; /* Увеличил шрифт */
+      transition: background-color 0.3s ease; /* Добавил плавный переход */
+    }
+
+    .magic-button:hover {
+      background-color: #2980b9;
     }
 
     .центр-контейнер {
@@ -21,42 +33,51 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
+      padding: 20px; /* Добавил отступы по краям */
+      box-sizing: border-box; /* Важно, чтобы padding не увеличивал ширину */
     }
 
     .gic-button {
       background-color: #424242;
       color: white;
-      padding: 10px 20px;
+      padding: 12px 24px;
       border: none;
-      border-radius: 18px;
+      border-radius: 20px;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
     }
 
-    .magic-button:hover {
-      background-color: #2980b9;
+    .gic-button:hover {
+       background-color: #222;
     }
 
     .container {
       display: flex;
+      flex-direction: column; /* Изменил на column для мобильных */
       align-items: center;
-      gap: 20px;
+      gap: 30px; /* Увеличил отступ между элементами */
+      width: 100%; /* Занимает всю ширину контейнера */
+      max-width: 600px; /* Ограничил максимальную ширину для больших экранов */
     }
 
     .button-column {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 20px;
+      width: 100%; /* Кнопки занимают всю ширину */
     }
 
     .image-container {
       position: relative;
       display: inline-block;
+      width: 100%; /* Изображение занимает всю доступную ширину */
+      max-width: 300px; /* Ограничил максимальную ширину изображения */
     }
 
     .image-container img {
       display: block;
-      width: 200px;
+      width: 100%; /* Изображение масштабируется по ширине контейнера */
       height: auto;
       border-radius: 10px;
     }
@@ -69,48 +90,51 @@
       background-color: rgba(0, 0, 0, 0.7);
       color: white;
       text-align: center;
-      padding: 5px;
-      font-size: 14px;
+      padding: 8px; /* Увеличил padding */
+      font-size: 16px;
       border-bottom-left-radius: 10px;
       border-bottom-right-radius: 10px;
     }
 
-    /* Стили для блока "Обо мне" */
     .about-me-box {
       background-color: #282c34;
       color: #ffffff;
       padding: 20px;
       border-radius: 10px;
-      width: 300px;
+      width: 100%; /* Занимает всю ширину контейнера */
+      max-width: 400px; /* Ограничил максимальную ширину */
+      box-sizing: border-box; /* Важно для padding */
     }
 
     .about-me-box h2 {
-      font-size: 20px;
+      font-size: 24px; /* Увеличил шрифт */
       margin-top: 0;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      text-align: center; /* Центрировал заголовок */
     }
 
     .about-me-box p {
-      font-size: 16px;
-      line-height: 1.5;
+      font-size: 18px; /* Увеличил шрифт */
+      line-height: 1.6;
     }
 
-    /* Стили для кнопки "Моя сборка" (под блоком "Обо мне") */
     .my-build-button {
-      background-color: #FFA500; /* Оранжевый цвет */
+      background-color: #FFA500;
       color: white;
-      padding: 10px 20px; /* Больше padding */
+      padding: 15px 30px; /* Увеличил padding */
       border: none;
-      border-radius: 15px;
+      border-radius: 20px; /* Увеличил радиус */
       cursor: pointer;
-      font-size: 16px; /* Больше шрифт */
-      width: 100%; /* Занимает всю ширину блока "Обо мне" */
-      display: block; /* Превращает в блочный элемент для работы ширины */
-      margin-top: 10px; /* Отступ сверху от блока "Обо мне" */
-      text-align: center; /* Центрирование текста */
+      font-size: 20px; /* Увеличил шрифт */
+      width: 100%;
+      display: block;
+      margin-top: 15px;
+      text-align: center;
+      transition: background-color 0.3s ease;
     }
+
     .my-build-button:hover {
-      background-color: #FF8C00; /* Более темный оранжевый */
+      background-color: #FF8C00;
     }
 
     /* Стили для модального окна */
@@ -123,59 +147,83 @@
       width: 100%;
       height: 100%;
       overflow: auto;
-      background-color: rgba(0, 0, 0, 0.4); /* Полупрозрачный фон */
+      background-color: rgba(0, 0, 0, 0.8); /* Более темный фон */
     }
 
     .modal-content {
-      background-color: #000000; /* Черный фон */
-      color: #ffffff; /* Белый текст */
-      margin: 10% auto; /* Уменьшаем отступ сверху */
+      background-color: #000000;
+      color: #ffffff;
+      margin: 20% auto; /* Увеличил отступ для мобильных */
       padding: 20px;
-      border: 1px solid #888;  /* Можно изменить цвет границы */
-      width: 50%; /* Уменьшаем ширину */
-      border-radius: 10px;
+      border: 1px solid #888;
+      width: 80%; /* Увеличил ширину для мобильных */
+      border-radius: 15px; /* Увеличил радиус */
+      box-sizing: border-box; /* Важно для padding */
+      max-height: 80vh; /* Ограничил высоту для длинного контента */
+      overflow-y: auto; /* Добавил прокрутку, если контент не помещается */
     }
 
     .close-button {
       color: #aaa;
       float: right;
-      font-size: 28px;
+      font-size: 32px; /* Увеличил размер кнопки закрытия */
       font-weight: bold;
       cursor: pointer;
     }
 
     .close-button:hover,
     .close-button:focus {
-      color: white; /* Белый цвет при наведении */
+      color: white;
       text-decoration: none;
       cursor: pointer;
     }
 
     .back-to-menu-button {
-      background-color: #f44336; /* Красный цвет */
+      background-color: #f44336;
       color: white;
-      padding: 10px 20px;
+      padding: 12px 24px;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
     }
 
     .back-to-menu-button:hover {
-      background-color: #da190b; /* Темнее красный */
+      background-color: #da190b;
     }
 
-      /* Добавление отступа между блоком "Обо мне" и кнопками */
-      .button-column {
-          margin-top: 10px; /* или другое значение */
-      }
+    .button-column {
+      margin-top: 20px;
+    }
 
- /* Стили для отображения ASCII арта */
     .ascii-art {
       font-family: monospace;
-      white-space: pre; /* Важно для сохранения форматирования */
-      font-size: 14px; /* Подберите размер шрифта */
-      line-height: 1.0; /*  Уменьшаем межстрочный интервал */
+      white-space: pre;
+      font-size: 16px; /* Увеличил размер шрифта */
+      line-height: 1.2; /* Увеличил межстрочный интервал */
+    }
+
+    /* Медиа-запрос для экранов шире 768px (например, планшеты и ПК) */
+    @media (min-width: 768px) {
+      .container {
+        flex-direction: row; /* Возвращаем горизонтальное расположение */
+        justify-content: center; /* Выравниваем по центру */
+        align-items: flex-start; /* Выравниваем элементы по верху */
+      }
+
+      .image-container {
+        max-width: 200px; /* Возвращаем максимальную ширину изображения */
+      }
+
+      .about-me-box {
+        max-width: 300px; /* Возвращаем максимальную ширину блока "Обо мне" */
+      }
+
+      .modal-content {
+        margin: 10% auto; /* Возвращаем отступ модального окна */
+        width: 50%;  /* Возвращаем ширину модального окна */
+      }
     }
   </style>
 </head>
@@ -185,10 +233,10 @@
 
       <div class="image-container">
         <img src="photo.jpg" alt="Описание изображения">
-        <div class="image-text">       </div>
+		<div class="image-text"></div>
       </div>
 
-      <div>  
+      <div>
           <div class="about-me-box">
             <h2>обо мне</h2>
             <p>Я школьник. Знаю немного Python,
@@ -213,10 +261,10 @@
       <span class="close-button" onclick="closeModal()">&times;</span>
       <p class="ascii-art">
     
-⣿⣿⣿⣿⠿⠿⠿⠿⠿⠿⠿⠿⠿⢿⡿⢿⡿⠿⠿⠿⠿⠿⠿⠿⠿⠿⣿⣿⣿⣿  Число мониторов: 2
-⣿⣿⣿⣿⠄⣶⠶⠶⠶⠶⠶⠶⠶⠾⠷⠾⠷⠶⠶⠶⠶⠶⠶⠶⣶⠄⣿⣿⣿⣿       Процессор: AMD Athlon 2 X2 220
-⣿⣿⣿⣿⠄⣿⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣿⠄⣿⣿⣿⣿  Оперативная память: DDR2
-⣿⣿⣿⣿⠄⣿⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣿⠄⣿⣿⣿⣿  Видеокарта: NVIDIA GeForce GTX 750 Ti
+⣿⣿⣿⣿⠿⠿⠿⠿⠿⠿⠿⠿⠿⢿⡿⢿⡿⠿⠿⠿⠿⠿⠿⠿⠿⠿⣿⣿⣿⣿
+⣿⣿⣿⣿⠄⣶⠶⠶⠶⠶⠶⠶⠶⠾⠷⠾⠷⠶⠶⠶⠶⠶⠶⠶⣶⠄⣿⣿⣿⣿
+⣿⣿⣿⣿⠄⣿⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣿⠄⣿⣿⣿⣿
+⣿⣿⣿⣿⠄⣿⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣿⠄⣿⣿⣿⣿
 ⣿⣿⣿⣿⠄⣿⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣿⠄⣿⣿⣿⣿
 ⣿⣿⣿⣿⠄⣿⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣿⠄⣿⣿⣿⣿
 ⣿⣿⣿⣿⠄⠿⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠿⠄⣿⣿⣿⣿
@@ -228,6 +276,10 @@
 ⣿⣿⠁⠄⠄⠄⠄⠄⠄⠄⣿⣦⣤⣤⣤⣤⣤⣤⣤⣿⠄⠄⠄⠄⠄⠄⠄⠈⣿⣿
 ⣿⣿⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⠶⢿⣿
 ⣿⣷⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣾⣿
+  Число мониторов: 2
+  Процессор: AMD Athlon 2 X2 220
+  Оперативная память: DDR2
+  Видеокарта: NVIDIA GeForce GTX 750 Ti
       </p>
       <button class="back-to-menu-button" onclick="closeModal()">Обратно в меню</button>
     </div>
